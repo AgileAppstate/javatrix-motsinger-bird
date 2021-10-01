@@ -64,6 +64,7 @@ public class Matrix {
 		        cell = 0;
             }
         }
+        matrix = result;
     }
               
     /**
