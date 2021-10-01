@@ -15,7 +15,10 @@ public class Matrix {
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < width; j++) {
                 matrix[i][j] = A[i][j];
-              
+            }
+        }
+    }
+
     // Construct an m-by-n constant matrix.
     // Parameters:
     //   m - Number of rows.
@@ -52,8 +55,8 @@ public class Matrix {
 	        throw new java.lang.IllegalArgumentException("Matrix inner dimensions must agree"); 
         double[][] result = new double[length][B.getWidth()];
         double cell = 0;
-	      double[][] b_matrix = B.getMatrix();
-	      for (int i = 0; i < result.length; ++i) {
+	    double[][] b_matrix = B.getMatrix();
+	    for (int i = 0; i < result.length; ++i) {
             for (int j = 0; j < result[0].length; ++j) {
 	            for (int k = 0; k < B.getLength(); ++k)
 		            cell += matrix[i][k] * b_matrix[k][j];
@@ -66,7 +69,7 @@ public class Matrix {
     /**
      * getMatrix method. Public accessor for the matrix field. 
     **/
-    public Matrix getMatrix() {
+    public double[][] getMatrix() {
         return matrix;
     }
 
