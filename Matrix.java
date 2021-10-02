@@ -3,9 +3,13 @@ public class Matrix {
     private int length;
     private int width;
   
-    // Construct a matrix from a 2D array.
-    // Parameters:
-    //   A - Two-dimensional array of doubles.
+    /**
+     * Constructor
+     *
+     * Construct a matrix from a 2D array.
+     * Parameters:
+     *   A - Two-dimensional array of doubles.
+    **/
     public Matrix(double[][] A) {
         //TODO: throw an IllegalArgumentException if all rows in A
         //      do not have the same length
@@ -19,11 +23,15 @@ public class Matrix {
         }
     }
 
-    // Construct an m-by-n constant matrix.
-    // Parameters:
-    //   m - Number of rows.
-    //   n - Number of columns.
-    //   s - Fill the matrix with this scalar value.
+    /**
+     * Constructor
+     *
+     * Construct an m-by-n constant matrix.
+     * Parameters:
+     *   m - Number of rows.
+     *   n - Number of columns.
+     *   s - Fill the matrix with this scalar value.
+    **/
     public Matrix(int m, int n, double s) {
         length = m;
         width = n;
@@ -64,6 +72,7 @@ public class Matrix {
 		        cell = 0;
             }
         }
+        matrix = result;
     }
               
     /**
@@ -86,5 +95,24 @@ public class Matrix {
     public int getWidth() {
         return width;
     }
-              
+
+    /**
+     * Print
+     *
+     * Print the matrix to stdout. Line the elements up
+     * in columns with a Fortran-like 'Fw.d' style format.
+     * 
+     * Parameters:
+     *   w - Column width.
+     *   d - Number of digits after the decimal.
+    **/
+    public void print(int w, int d) {
+        String form = "%-" + String.valueOf(w) + "." + String.valueOf(d) + "f ";
+        for (int i = 0; i < length; i++) {
+            for (int j = 0; j < width; j++) {
+                System.out.format(form, matrix[i][j]);
+            }
+            System.out.println();
+        }
+    }
 }
