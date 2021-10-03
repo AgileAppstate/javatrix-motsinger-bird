@@ -16,12 +16,16 @@ default:
 	@echo "____________________ compile - builds project"
 	@echo "____________________ test - runs JUnit tests"
 
-compile: ./Matrix.java ./MatrixTest.java $(JUNIT_JAR)
-	javac -cp $(JUNIT_JAR) MatrixTest.java Matrix.java
+compile: ./src/javatrix/Matrix.java ./src/MatrixTest.java ./src/Testtrix.java $(JUNIT_JAR)
+	javac -cp $(JUNIT_JAR) ./src/MatrixTest.java ./src/javatrix/Matrix.java
+	javac ./src/Testtrix.java ./src/javatrix/Matrix.java
 
 clean: 
 	rm -f *~
 	rm -f *.class
 
-test: ./Matrix.class ./MatrixTest.class $(JUNIT_JAR)
+test: ./src/javatrix/Matrix.class ./src/MatrixTest.class $(JUNIT_JAR)
 	java -cp $(JUNIT_JAR) $(JUNIT_RUNNER) --scan-class-path
+
+testtrix: ./src/Testtrix.class
+	cd src; java -cp . Testtrix
