@@ -90,7 +90,7 @@ public class Matrix {
     }
 
     /**
-     *
+     * setMatrix method. Public setter for the matrix field. 
     **/
     public void setMatrix(double[][] m) {
         matrix = m;
@@ -129,6 +129,7 @@ public class Matrix {
             System.out.println();
         }
     }
+
 
     public static void main(String[] args) {
         Matrix a = new Matrix(3, 10, 1.0);

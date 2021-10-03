@@ -139,6 +139,26 @@ public class MatrixTest {
 		if (! c.equals(s))
 			fail("Unexpected output:\n"+s+"\n");
 	}
+
+	@Test
+	public void testConstructor1() {
+		Matrix a = new Matrix(2, 2, 0.0);
+		assert(a.getLength() == 2 && a.getWidth() == 2);
+		double[][] am = a.getMatrix();
+		for (int i = 0; i < a.getLength(); ++i)
+			for (int j = 0; j < a.getLength(); ++j)
+				assert(am[i][j] == 0.0);
+	}
+
+	@Test
+	public void testConstructor2() {
+		Matrix a = new Matrix(new double[][]{{0., 0.}, {0., 0.}});
+		assert(a.getLength() == 2 && a.getWidth() == 2);
+		double[][] am = a.getMatrix();
+		for (int i = 0; i < a.getLength(); ++i)
+			for (int j = 0; j < a.getLength(); ++j)
+				assert(am[i][j] == 0.0);
+	}
 	
 }
 	
