@@ -25,7 +25,7 @@ clean:
 	rm -f *.class
 
 test: ./src/javatrix/Matrix.class ./src/MatrixTest.class $(JUNIT_JAR)
-	java -cp $(JUNIT_JAR) $(JUNIT_RUNNER) --scan-class-path
+	cd src; java -cp .:../$(JUNIT_JAR) $(JUNIT_RUNNER) --scan-class-path
 
 testtrix: ./src/Testtrix.class
 	cd src; java -cp . Testtrix

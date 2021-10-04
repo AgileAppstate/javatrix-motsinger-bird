@@ -114,7 +114,7 @@ public class MatrixTest {
 		System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
 		
 		String s = baos.toString();
-		String c = "1.00 1.00 1.00\n1.00 1.00 1.00\n1.00 1.00 1.00\n";
+		String c = "1.00 1.00 1.00 \n1.00 1.00 1.00 \n1.00 1.00 1.00 \n";
 
 		if (! c.equals(s))
 			fail("Unexpected output:\n"+s+"\n");		
@@ -134,7 +134,7 @@ public class MatrixTest {
 		System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
 		
 		String s = baos.toString();
-		String c = "1.00     1.00     1.00\n1.00     1.00     1.00\n1.00     1.00     1.00\n";
+		String c = "1.00     1.00     1.00     \n1.00     1.00     1.00     \n1.00     1.00     1.00     \n";
 
 		if (! c.equals(s))
 			fail("Unexpected output:\n"+s+"\n");
