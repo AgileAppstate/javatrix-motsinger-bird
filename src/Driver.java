@@ -10,30 +10,34 @@ public class Driver {
     static Matrix m;
     static Scanner input = new Scanner(System.in);
 
+    /**
+     * create method.
+     * Creates a matrix using user input. 
+     */
     public static void create() {
         System.out.println("\n1.) m * n with all entries being a real number s");
         System.out.println("2.) m * n with inputted rows")
         System.out.print("Please choose away to create a matrix (1 or 2): ");
         int choice = input.nextInt();
-        if (choice == 1) {
+        if (choice == 1 || choice == 2) {
             System.out.print("\nEnter an m: ");
             int m = input.nextInt();
             System.out.print("\nEnter an n: ");
             int n = input.nextInt();
-            System.out.print("\nEnter an s: ");
-            double s = input.nextDouble();
-            m = new Matrix(m, n, s);
-            System.out.println("\nMatrix created. Going back to initial options.");
-        }
-        else if (choice == 2) {
-            System.out.print("\nEnter an m: ");
-            int m = input.nextInt();
-            System.out.print("\nEnter an n: ");
-            int n = input.nextInt();
-            double[][] arr = new double[m][n]();
-            for (int i = 0; i < m; ++i) {
-                System.out.print("Input row " + i + ": ");
-                
+            if (choice == 1) {
+                System.out.print("\nEnter an s: ");
+                double s = input.nextDouble();
+                m = new Matrix(m, n, s);
+                System.out.println("\nMatrix created. Going back to initial options.");
+            }
+            else if (choice == 2) {
+                double[][] arr = new double[m][n]();
+                for (int i = 0; i < m; ++i) {
+                    System.out.print("\nInput row " + i + ": ");
+                    for (int j = 0; j < n; ++j) 
+                        arr[i][j] = input.nextDouble();
+                }
+                m = new Matrix(arr);
             }
         }
         else
