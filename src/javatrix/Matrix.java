@@ -7,13 +7,54 @@ public class Matrix {
     /**
      * Constructor
      *
-     * Construct a matrix from a 2D array.
+     * Construct an m-by-n matrix of zeros.
      * Parameters:
-     *   A - Two-dimensional array of doubles.
+     *   m - Number of rows.
+     *   n - Number of columns.
+    **/
+    public Matrix(int m, int n) {
+        length = m;
+        width = n;
+        matrix = new double[length][width];
+        for (int i = 0; i < length; i++) {
+            for (int j = 0; j < width; j++) {
+                matrix[i][j] = 0;
+            }
+        }
+    }
+
+    /**
+     * Constructor
+     *
+     * Construct an m-by-n constant matrix.
+     * @param m - Number of rows.
+     * @param n - Number of columns.
+     * @param s - Fill the matrix with this scalar value.
+    **/
+    public Matrix(int m, int n, double s) {
+        length = m;
+        width = n;
+        matrix = new double[length][width];
+        for (int i = 0; i < length; i++) {
+            for (int j = 0; j < width; j++) {
+                matrix[i][j] = s;
+            }
+        }
+    }
+    
+    /**
+     * Constructor
+     *
+     * Construct a matrix from a 2D array.
+     * @param A - Two-dimensional array of doubles.
+     * @throws IllegalArgumentException - All rows must have the same length
     **/
     public Matrix(double[][] A) {
-        //TODO: throw an IllegalArgumentException if all rows in A
-        //      do not have the same length
+        int len =  A[0].length;
+        for (int k = 1; k < A.length; k++) {
+            if (A[k].length != len)
+                throw new java.lang.IllegalArgumentException("All rows must have the same length");
+        }
         length = A.length;
         width = A[0].length;
         matrix = new double[length][width];
@@ -27,23 +68,43 @@ public class Matrix {
     /**
      * Constructor
      *
-     * Construct an m-by-n constant matrix.
-     * Parameters:
-     *   m - Number of rows.
-     *   n - Number of columns.
-     *   s - Fill the matrix with this scalar value.
+     * Construct a matrix quickly without checking arguments.
+     * @param A - Two-dimensional array of doubles.
+     * @param m - Number of rows.
+     * @param n - Number of columns.
     **/
-    public Matrix(int m, int n, double s) {
+    public Matrix(double[][] A, int m, int n) {
         length = m;
         width = n;
         matrix = new double[length][width];
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < width; j++) {
-                matrix[i][j] = s;
+                matrix[i][j] = A[i][j];
             }
         }
-    }    
-              
+    }
+
+    /**
+     * Constructor
+     *
+     * Construct a matrix from a one-dimensional packed array.
+     * @param vals - One-dimensional array of doubles, packed by columns (ala Fortran).
+     * @param m - Number of rows.
+     * @throws java.lang.IllegalArgumentException - Array length must be a multiple of m.
+    **/
+    public Matrix(double[] vals, int m) {
+        if (vals.length % m != 0)
+            throw new java.lang.IllegalArgumentException("Array length must be a multiple of m.");
+        length = vals.length / m;
+        width = m;
+        matrix = new double[length][width];
+        for (int i = 0; i < length; i++) {
+            for (int j = 0; j < width; j++) {
+                matrix[i][j] = vals[(i*m)+j];
+            }
+        }
+    }
+
     /**
      * times method. Multiplies the matrix by a scalar product.  
      * @param s - the scalar.
