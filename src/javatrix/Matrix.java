@@ -143,6 +143,41 @@ public class Matrix {
         return c;
     }
               
+
+    /** 
+     * minus method. Subtracts by a matrix B.
+     * @param B - the matrix to subtract by.
+     * @return C = A - B
+     * @throws IllegalArguementException - Thrown when inner dimensions are not equal. 
+     */
+    public Matrix minus(Matrix B) {
+        if (width != B.getWidth() || length != B.getLength())
+	        throw new java.lang.IllegalArgumentException("Matrix inner dimensions must agree");
+        double[][] arr2 = B.getMatrix();
+        double[][] arr3 = new double[B.getLength()][B.getWidth()];
+        for (int i = 0; i < arr2.length; ++i)
+            for (int j = 0; j < arr2[0].length; ++j)
+		        arr3[i][j] = matrix[i][j] - arr2[i][j];
+        return new Matrix(arr3);
+    }
+
+    /** 
+     * minus method. Subtracts by a matrix B.
+     * @param B - the matrix to subtract by.
+     * @return C = A + B
+     * @throws IllegalArguementException - Thrown when inner dimensions are not equal. 
+     */
+    public Matrix plus(Matrix B) {
+        if (width != B.getWidth() || length != B.getLength())
+	        throw new java.lang.IllegalArgumentException("Matrix inner dimensions must agree");
+        double[][] arr2 = B.getMatrix();
+        double[][] arr3 = new double[B.getLength()][B.getWidth()];
+        for (int i = 0; i < arr2.length; ++i)
+            for (int j = 0; j < arr2[0].length; ++j)
+		        arr3[i][j] = matrix[i][j] + arr2[i][j];
+        return new Matrix(arr3);
+    }
+
     /**
      * getMatrix method. Public accessor for the matrix field. 
     **/
