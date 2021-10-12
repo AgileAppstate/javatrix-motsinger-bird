@@ -19,6 +19,7 @@ default:
 compile: ./src/javatrix/Matrix.java ./src/MatrixTest.java ./src/Testtrix.java $(JUNIT_JAR)
 	javac -cp $(JUNIT_JAR) ./src/MatrixTest.java ./src/javatrix/Matrix.java
 	javac ./src/Testtrix.java ./src/javatrix/Matrix.java
+	javac ./src/Driver.java ./src/javatrix/Matrix.java
 
 clean: 
 	rm -f *~
@@ -29,3 +30,6 @@ test: ./src/javatrix/Matrix.class ./src/MatrixTest.class $(JUNIT_JAR)
 
 testtrix: ./src/Testtrix.class
 	cd src; java -cp . Testtrix
+
+driver: ./src/Driver.class
+	cd src; java -cp . Driver
