@@ -161,8 +161,28 @@ public class Matrix {
         return new Matrix(arr3);
     }
 
+
     /** 
-     * minus method. Subtracts by a matrix B.
+     * minusEquals method. Subtracts by a matrix B and changes A.
+     * @param B - the matrix to subtract by.
+     * @return C = A - B
+     * @throws IllegalArguementException - Thrown when inner dimensions are not equal. 
+     */
+    public Matrix minusEquals(Matrix B) {
+        if (width != B.getWidth() || length != B.getLength())
+	        throw new java.lang.IllegalArgumentException("Matrix inner dimensions must agree");
+        double[][] arr2 = B.getMatrix();
+        double[][] arr3 = new double[B.getLength()][B.getWidth()];
+        for (int i = 0; i < arr2.length; ++i)
+            for (int j = 0; j < arr2[0].length; ++j)
+                arr3[i][j] = matrix[i][j] - arr2[i][j];
+        setMatrix(arr3);
+        return new Matrix(matrix);
+    }
+
+
+    /** 
+     * pluss method. Subtracts by a matrix B.
      * @param B - the matrix to subtract by.
      * @return C = A + B
      * @throws IllegalArguementException - Thrown when inner dimensions are not equal. 
@@ -177,6 +197,26 @@ public class Matrix {
 		        arr3[i][j] = matrix[i][j] + arr2[i][j];
         return new Matrix(arr3);
     }
+
+
+    /** 
+     * plusEquals method. Subtracts by a matrix B and changes A.
+     * @param B - the matrix to subtract by.
+     * @return C = A - B
+     * @throws IllegalArguementException - Thrown when inner dimensions are not equal. 
+     */
+    public Matrix plusEquals(Matrix B) {
+        if (width != B.getWidth() || length != B.getLength())
+	        throw new java.lang.IllegalArgumentException("Matrix inner dimensions must agree");
+        double[][] arr2 = B.getMatrix();
+        double[][] arr3 = new double[B.getLength()][B.getWidth()];
+        for (int i = 0; i < arr2.length; ++i)
+            for (int j = 0; j < arr2[0].length; ++j)
+		        arr3[i][j] = matrix[i][j] + arr2[i][j];
+        setMatrix(arr3);
+        return new Matrix(matrix);
+    }
+
 
     /**
      * getMatrix method. Public accessor for the matrix field. 
