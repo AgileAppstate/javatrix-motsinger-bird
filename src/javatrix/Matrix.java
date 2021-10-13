@@ -8,9 +8,8 @@ public class Matrix {
      * Constructor
      *
      * Construct an m-by-n matrix of zeros.
-     * Parameters:
-     *   m - Number of rows.
-     *   n - Number of columns.
+     * @param m - Number of rows.
+     * @param n - Number of columns.
     **/
     public Matrix(int m, int n) {
         length = m;
@@ -142,22 +141,22 @@ public class Matrix {
         c.setMatrix(result);
         return c;
     }
-              
 
-    /** 
+
+    /**
      * minus method. Subtracts by a matrix B.
      * @param B - the matrix to subtract by.
      * @return C = A - B
-     * @throws IllegalArguementException - Thrown when inner dimensions are not equal. 
+     * @throws IllegalArgumentException - Thrown when inner dimensions are not equal.
      */
     public Matrix minus(Matrix B) {
         if (width != B.getWidth() || length != B.getLength())
-	        throw new java.lang.IllegalArgumentException("Matrix inner dimensions must agree");
+            throw new java.lang.IllegalArgumentException("Matrix inner dimensions must agree");
         double[][] arr2 = B.getMatrix();
         double[][] arr3 = new double[B.getLength()][B.getWidth()];
         for (int i = 0; i < arr2.length; ++i)
             for (int j = 0; j < arr2[0].length; ++j)
-		        arr3[i][j] = matrix[i][j] - arr2[i][j];
+                arr3[i][j] = matrix[i][j] - arr2[i][j];
         return new Matrix(arr3);
     }
 
@@ -170,7 +169,7 @@ public class Matrix {
      */
     public Matrix minusEquals(Matrix B) {
         if (width != B.getWidth() || length != B.getLength())
-	        throw new java.lang.IllegalArgumentException("Matrix inner dimensions must agree");
+            throw new java.lang.IllegalArgumentException("Matrix inner dimensions must agree");
         double[][] arr2 = B.getMatrix();
         double[][] arr3 = new double[B.getLength()][B.getWidth()];
         for (int i = 0; i < arr2.length; ++i)
@@ -189,12 +188,12 @@ public class Matrix {
      */
     public Matrix plus(Matrix B) {
         if (width != B.getWidth() || length != B.getLength())
-	        throw new java.lang.IllegalArgumentException("Matrix inner dimensions must agree");
+            throw new java.lang.IllegalArgumentException("Matrix inner dimensions must agree");
         double[][] arr2 = B.getMatrix();
         double[][] arr3 = new double[B.getLength()][B.getWidth()];
         for (int i = 0; i < arr2.length; ++i)
             for (int j = 0; j < arr2[0].length; ++j)
-		        arr3[i][j] = matrix[i][j] + arr2[i][j];
+                arr3[i][j] = matrix[i][j] + arr2[i][j];
         return new Matrix(arr3);
     }
 
@@ -207,16 +206,133 @@ public class Matrix {
      */
     public Matrix plusEquals(Matrix B) {
         if (width != B.getWidth() || length != B.getLength())
-	        throw new java.lang.IllegalArgumentException("Matrix inner dimensions must agree");
+            throw new java.lang.IllegalArgumentException("Matrix inner dimensions must agree");
         double[][] arr2 = B.getMatrix();
         double[][] arr3 = new double[B.getLength()][B.getWidth()];
         for (int i = 0; i < arr2.length; ++i)
             for (int j = 0; j < arr2[0].length; ++j)
-		        arr3[i][j] = matrix[i][j] + arr2[i][j];
+                arr3[i][j] = matrix[i][j] + arr2[i][j];
         setMatrix(arr3);
         return new Matrix(matrix);
     }
 
+
+    /* GETTERS */
+
+    /**
+     * getArray
+     *
+     * Access the internal two-dimensional array.
+    **/
+    public double[][] getArray() {
+        return matrix;
+    }
+
+    /**
+     * getArrayCopy
+     *
+     * Copy the internal two-dimensional array.
+    **/
+    public double[][] getArrayCopy() {
+        double[][] arr = new double[length][width];
+        for (int i = 0; i < length; i++) {
+            for (int j = 0; j < width; j++) {
+                arr[i][i] = matrix[i][j];
+            }
+        }
+        return arr;
+    }
+
+    /**
+     * getColumnPackedCopy
+     *
+     * Make a one-dimensional column packed copy of the internal array.
+    **/
+    public double[] getColumnPackedCopy() {
+        double[] arr = new double[length * width];
+        for (int i = 0; i < length; i++) {
+            for (int j = 0; j < width; j++) {
+                arr[i+(j*length)] = matrix[i][j];
+            }
+        }
+        return arr;
+    }
+
+    /**
+     * getRowPackedCopy
+     *
+     * Make a one-dimensional row packed copy of the internal array.
+    **/
+    public double[] getRowPackedCopy() {
+        double[] arr = new double[length * width];
+        for (int i = 0; i < length; i++) {
+            for (int j = 0; j < width; j++) {
+                arr[(i*width)+j] = matrix[i][j];
+            }
+        }
+        return arr;
+    }
+
+    /**
+     * getRowDimension
+     *
+     * Get row dimension (length).
+    **/
+    public int getRowDimension() {
+        return length;
+    }
+
+    /**
+     * getColumnDimension
+     *
+     * Get column dimension (width).
+    **/
+    public int getColumnDimension() {
+        return width;
+    }
+
+    /**
+     * get
+     *
+     * Get a single element.
+     * @param i - Row index.
+     * @param j - Column index.
+     * @throws java.lang.ArrayIndexOutOfBoundsException
+     */
+    public double get(int i, int j) {
+        if (i >= length || j >= width)
+            throw new java.lang.ArrayIndexOutOfBoundsException();
+        return matrix[i][j];
+    }
+
+    //TODO: getMatrix variants
+    //      more complicated getters that
+    //      return a portion of the matrix
+
+    /* SETTERS */
+
+    /**
+     * set
+     *
+     * Set a single element.
+     * @param i - Row index.
+     * @param j - Column index.
+     * @param s - New value.
+     * @throws java.lang.ArrayIndexOutOfBoundsException
+    **/
+    public void set(int i, int j, double s) {
+        if (i >= length || j >= width)
+            throw new java.lang.ArrayIndexOutOfBoundsException();
+        matrix[i][j] = s;
+    }
+
+    //TODO: setMatrix variants
+    //      more complicated setters that
+    //      set a portion of the matrix
+
+    /* OLD GETTERS/SETTERS */
+    /* - TODO: some are used in other files, so those need
+     *         to be refactored before these are removed */
 
     /**
      * getMatrix method. Public accessor for the matrix field. 
