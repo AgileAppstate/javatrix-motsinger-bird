@@ -101,6 +101,278 @@ public class MatrixTest {
 	}	
 
 	@Test
+	public void testPlus1() {
+		// Redirect System.out to a sring
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(baos));
+		
+		// Prep done, call function of interest
+		Matrix a = new Matrix(2, 3, 2.0);
+		Matrix b = new Matrix(2, 3, 1.0);
+		Matrix M = a.plus(b);
+		double[][] m = M.getMatrix();
+		
+		// Restore the stdout stream
+		System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
+		
+		if (M.getLength() != 2) 
+			fail("Length incorrect should be 2 for matrices of 2x3 times 3x4.\n");
+
+		if (M.getWidth() != 3)
+			fail("Width incorrect should be 4 for matrices of 2x3 times 3x4.\n");
+
+		// Check for desired result
+		for (int i = 0; i < M.getLength(); ++i) {
+			for (int j = 0; j < M.getWidth(); ++j) {
+				if (m[i][j] != 3.0)
+					fail("Unexpected output.\n");
+			}
+		}		
+	}
+
+	@Test
+	public void testPlus2() {
+		// Redirect System.out to a sring
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(baos));
+		
+		// Prep done, call function of interest
+		Matrix a = new Matrix(2, 3, -1.0);
+		Matrix b = new Matrix(2, 3, 1.0);
+		Matrix M = a.plus(b);
+		double[][] m = M.getMatrix();
+		
+		// Restore the stdout stream
+		System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
+		
+		if (M.getLength() != 2) 
+			fail("Length incorrect should be 2 for matrices of 2x3 times 3x4.\n");
+
+		if (M.getWidth() != 3)
+			fail("Width incorrect should be 4 for matrices of 2x3 times 3x4.\n");
+
+		// Check for desired result
+		for (int i = 0; i < M.getLength(); ++i) {
+			for (int j = 0; j < M.getWidth(); ++j) {
+				if (m[i][j] != 0)
+					fail("Unexpected output.\n");
+			}
+		}		
+	}
+
+
+	@Test
+	public void testMinus1() {
+		// Redirect System.out to a sring
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(baos));
+		
+		// Prep done, call function of interest
+		Matrix a = new Matrix(2, 3, 2.0);
+		Matrix b = new Matrix(2, 3, 1.0);
+		Matrix M = a.minus(b);
+		double[][] m = M.getMatrix();
+		
+		// Restore the stdout stream
+		System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
+		
+		if (M.getLength() != 2) 
+			fail("Length incorrect should be 2 for matrices of 2x3 times 3x4.\n");
+
+		if (M.getWidth() != 3)
+			fail("Width incorrect should be 4 for matrices of 2x3 times 3x4.\n");
+
+		// Check for desired result
+		for (int i = 0; i < M.getLength(); ++i) {
+			for (int j = 0; j < M.getWidth(); ++j) {
+				if (m[i][j] != 1.0)
+					fail("Unexpected output.\n");
+			}
+		}		
+	}
+
+	@Test
+	public void testMinus2() {
+		// Redirect System.out to a sring
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(baos));
+		
+		// Prep done, call function of interest
+		Matrix a = new Matrix(2, 3, -1.0);
+		Matrix b = new Matrix(2, 3, 1.0);
+		Matrix M = a.minus(b);
+		double[][] m = M.getMatrix();
+		
+		// Restore the stdout stream
+		System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
+		
+		if (M.getLength() != 2) 
+			fail("Length incorrect should be 2 for matrices of 2x3 times 3x4.\n");
+
+		if (M.getWidth() != 3)
+			fail("Width incorrect should be 4 for matrices of 2x3 times 3x4.\n");
+
+		// Check for desired result
+		for (int i = 0; i < M.getLength(); ++i) {
+			for (int j = 0; j < M.getWidth(); ++j) {
+				if (m[i][j] != -2.0)
+					fail("Unexpected output.\n");
+			}
+		}		
+	}
+
+
+	@Test
+	public void testPlusEquals1() {
+		// Redirect System.out to a sring
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(baos));
+		
+		// Prep done, call function of interest
+		Matrix a = new Matrix(2, 3, 2.0);
+		Matrix b = new Matrix(2, 3, 1.0);
+		Matrix M = a.plusEquals(b);
+		double[][] m = M.getMatrix();
+		double[][] a1 = a.getMatrix();
+		
+		// Restore the stdout stream
+		System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
+		
+		if (M.getLength() != 2) 
+			fail("Length incorrect should be 2 for matrices of 2x3 times 3x4.\n");
+
+		if (M.getWidth() != 3)
+			fail("Width incorrect should be 4 for matrices of 2x3 times 3x4.\n");
+
+		// Check for desired result
+		for (int i = 0; i < M.getLength(); ++i) {
+			for (int j = 0; j < M.getWidth(); ++j) {
+				if (m[i][j] != 3.0)
+					fail("Unexpected output.\n");
+			}
+		}	
+		for (int i = 0; i < a.getLength(); ++i) {
+			for (int j = 0; j < a.getWidth(); ++j) {
+				if (a1[i][j] != 3.0)
+					fail("Unexpected output.\n");
+			}
+		}	
+	}
+
+	@Test
+	public void testPlusEquals2() {
+		// Redirect System.out to a sring
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(baos));
+		
+		// Prep done, call function of interest
+		Matrix a = new Matrix(2, 3, -1.0);
+		Matrix b = new Matrix(2, 3, 1.0);
+		Matrix M = a.plusEquals(b);
+		double[][] m = M.getMatrix();
+		double[][] a1 = a.getMatrix();
+		
+		// Restore the stdout stream
+		System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
+		
+		if (M.getLength() != 2) 
+			fail("Length incorrect should be 2 for matrices of 2x3 times 3x4.\n");
+
+		if (M.getWidth() != 3)
+			fail("Width incorrect should be 4 for matrices of 2x3 times 3x4.\n");
+
+		// Check for desired result
+		for (int i = 0; i < M.getLength(); ++i) {
+			for (int j = 0; j < M.getWidth(); ++j) {
+				if (m[i][j] != 0)
+					fail("Unexpected output.\n");
+			}
+		}
+		for (int i = 0; i < a.getLength(); ++i) {
+			for (int j = 0; j < a.getWidth(); ++j) {
+				if (a1[i][j] != 0)
+					fail("Unexpected output.\n");
+			}
+		}			
+	}
+
+
+	@Test
+	public void testMinusEquals1() {
+		// Redirect System.out to a sring
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(baos));
+		
+		// Prep done, call function of interest
+		Matrix a = new Matrix(2, 3, 2.0);
+		Matrix b = new Matrix(2, 3, 1.0);
+		Matrix M = a.minusEquals(b);
+		double[][] m = M.getMatrix();
+		double[][] a1 = a.getMatrix();
+		
+		// Restore the stdout stream
+		System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
+		
+		if (M.getLength() != 2) 
+			fail("Length incorrect should be 2 for matrices of 2x3 times 3x4.\n");
+
+		if (M.getWidth() != 3)
+			fail("Width incorrect should be 4 for matrices of 2x3 times 3x4.\n");
+
+		// Check for desired result
+		for (int i = 0; i < M.getLength(); ++i) {
+			for (int j = 0; j < M.getWidth(); ++j) {
+				if (m[i][j] != 1.0)
+					fail("Unexpected output.\n");
+			}
+		}	
+		for (int i = 0; i < a.getLength(); ++i) {
+			for (int j = 0; j < a.getWidth(); ++j) {
+				if (a1[i][j] != 1.0)
+					fail("Unexpected output.\n");
+			}
+		}	
+	}
+
+	@Test
+	public void testMinusEquals2() {
+		// Redirect System.out to a sring
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(baos));
+		
+		// Prep done, call function of interest
+		Matrix a = new Matrix(2, 3, -1.0);
+		Matrix b = new Matrix(2, 3, 1.0);
+		Matrix M = a.minusEquals(b);
+		double[][] m = M.getMatrix();
+		double[][] a1 = a.getMatrix();
+		
+		// Restore the stdout stream
+		System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
+		
+		if (M.getLength() != 2) 
+			fail("Length incorrect should be 2 for matrices of 2x3 times 3x4.\n");
+
+		if (M.getWidth() != 3)
+			fail("Width incorrect should be 4 for matrices of 2x3 times 3x4.\n");
+
+		// Check for desired result
+		for (int i = 0; i < M.getLength(); ++i) {
+			for (int j = 0; j < M.getWidth(); ++j) {
+				if (m[i][j] != -2.0)
+					fail("Unexpected output.\n");
+			}
+		}
+		for (int i = 0; i < a.getLength(); ++i) {
+			for (int j = 0; j < a.getWidth(); ++j) {
+				if (a1[i][j] != -2.0)
+					fail("Unexpected output.\n " + a1[i][j] + " " + i + " " + j);
+			}
+		}		
+	}
+
+
+	@Test
 	public void testPrint1() {
 		// Redirect System.out to a sring
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -119,6 +391,7 @@ public class MatrixTest {
 		if (! c.equals(s))
 			fail("Unexpected output:\n"+s+"\n");		
 	}
+
 
 	@Test
 	public void testPrint2() {
@@ -140,6 +413,7 @@ public class MatrixTest {
 			fail("Unexpected output:\n"+s+"\n");
 	}
 
+
 	@Test
 	public void testConstructor1() {
 		Matrix a = new Matrix(2, 2, 0.0);
@@ -149,6 +423,7 @@ public class MatrixTest {
 			for (int j = 0; j < a.getLength(); ++j)
 				assert(am[i][j] == 0.0);
 	}
+
 
 	@Test
 	public void testConstructor2() {
