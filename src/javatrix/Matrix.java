@@ -216,6 +216,21 @@ public class Matrix {
         return new Matrix(matrix);
     }
 
+    /**
+     * transpose
+     *
+     * Returns the transpose of this matrix.
+    **/
+    public Matrix transpose() {
+        double[][] newArr = new double[width][length];
+        for (int i = 0; i < length; i++) {
+            for (int j = 0; j < width; j++) {
+                newArr[j][i] = matrix[i][j];
+            }
+        }
+        return new Matrix(newArr);
+    }
+
 
     /* GETTERS */
 
