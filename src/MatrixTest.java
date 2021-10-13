@@ -415,25 +415,81 @@ public class MatrixTest {
 
 
 	@Test
+    public void testConstructor0() {
+        // Construct an m-by-n matrix of zeros.
+        Matrix a = new Matrix(2, 2);
+        assert(a.getLength() == 2 && a.getWidth() == 2);
+        double[][] am = a.getMatrix();
+        for (int i = 0; i < a.getLength(); ++i)
+            for (int j = 0; j < a.getWidth(); ++j)
+                assert(am[i][j] == 0.0);
+    }
+    
+    
+    @Test
 	public void testConstructor1() {
+        // Construct an m-by-n constant matrix.
 		Matrix a = new Matrix(2, 2, 0.0);
 		assert(a.getLength() == 2 && a.getWidth() == 2);
 		double[][] am = a.getMatrix();
 		for (int i = 0; i < a.getLength(); ++i)
-			for (int j = 0; j < a.getLength(); ++j)
+			for (int j = 0; j < a.getWidth(); ++j)
 				assert(am[i][j] == 0.0);
 	}
 
 
 	@Test
 	public void testConstructor2() {
+        // Construct a matrix from a 2D array.
 		Matrix a = new Matrix(new double[][]{{0., 0.}, {0., 0.}});
 		assert(a.getLength() == 2 && a.getWidth() == 2);
 		double[][] am = a.getMatrix();
 		for (int i = 0; i < a.getLength(); ++i)
-			for (int j = 0; j < a.getLength(); ++j)
+			for (int j = 0; j < a.getWidth(); ++j)
 				assert(am[i][j] == 0.0);
 	}
+
+
+    @Test
+    public void testConstructor3() {
+        // Construct a matrix quickly without checking arguments.
+        Matrix a = new Matrix(new double[][]{{0., 0.}, {0., 0.}}, 2, 2);
+        assert(a.getLength() == 2 && a.getWidth() == 2);
+        double[][] am = a.getMatrix();
+        for (int i = 0; i < a.getLength(); ++i)
+            for (int j = 0; j < a.getWidth(); ++j)
+                assert(am[i][j] == 0.0);
+    }
+
+
+    @Test
+    public void testConstructor4() {
+        // Construct a matrix from a one-dimensional packed array.
+        double[] pack = {1.0, 4.0, 7.0,
+                         2.0, 5.0, 8.0,
+                         3.0, 6.0, 9.0};
+        Matrix a = new Matrix(pack, 3);
+        assert(a.getLength() == 3 && a.getWidth() == 3);
+        double[][] am = a.getMatrix();
+        double prev = 0.0;
+        for (int i = 0; i < a.getLength(); ++i) {
+            for (int j = 0; j < a.getWidth(); ++j) {
+                assert(am[i][j] > prev);
+                prev = am[i][j];
+            }
+        }
+    }
+
+
+    @Test
+    public void testGetArrayCopy() {
+        Matrix a = new Matrix(new double[][]{{0., 0.}, {0., 0.}});
+        double[][] copy = a.getArrayCopy();
+        double[][] am = a.getMatrix();
+        for (int i = 0; i < a.getLength(); ++i)
+            for (int j = 0; j < a.getWidth(); ++j)
+                assert(am[i][j] == copy[i][j]);
+    }
 	
 }
 	
