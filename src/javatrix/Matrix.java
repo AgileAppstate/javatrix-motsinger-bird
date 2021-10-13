@@ -104,19 +104,6 @@ public class Matrix {
         }
     }
 
-    /**
-     * times method. Multiplies the matrix by a scalar product.  
-     * @param s - the scalar.
-    **/
-    public Matrix times(double s) {
-        Matrix c = new Matrix(length, width, 0);
-        double[][] m = new double[length][width];
-        for (int i = 0; i < length; ++i)
-	        for (int j = 0; j < width; ++j)
-		        m[i][j] = s * matrix[i][j];
-        c.setMatrix(m);
-        return c;
-    }
 
     /**
      * times method. Multiplies the matrix by another matrix B.
@@ -139,6 +126,136 @@ public class Matrix {
             }
         }
         c.setMatrix(result);
+        return c;
+    }
+
+
+    /**
+     * times method. Multiplies the matrix by a scalar product.  
+     * @param s - the scalar.
+    **/
+    public Matrix times(double s) {
+        Matrix c = new Matrix(length, width, 0);
+        double[][] m = new double[length][width];
+        for (int i = 0; i < length; ++i)
+	        for (int j = 0; j < width; ++j)
+		        m[i][j] = s * matrix[i][j];
+        c.setMatrix(m);
+        return c;
+    }
+
+
+    /**
+     * timesEquals method. Multiplies the matrix by a scalar product.  
+     * @param s - the scalar.
+    **/
+    public Matrix timesEquals(double s) {
+        Matrix c = new Matrix(length, width, 0);
+        double[][] m = new double[length][width];
+        for (int i = 0; i < length; ++i)
+	        for (int j = 0; j < width; ++j)
+		        m[i][j] = s * matrix[i][j];
+        setMatrix(m);
+        c.setMatrix(m);
+        return c;
+    }
+
+
+    /**
+     * arrayTimes method. Multiplies the matrix by a another matrix element wise.  
+     * @param B - the input matrix to multiply by.
+    **/
+    public Matrix arrayTimes(Matrix B) {
+        Matrix c = new Matrix(length, width, 0);
+        double[][] b = B.getMatrix();
+        double[][] m = new double[length][width];
+        for (int i = 0; i < length; ++i)
+	        for (int j = 0; j < width; ++j)
+		        m[i][j] = b[i][j] * matrix[i][j];
+        c.setMatrix(m);
+        return c;
+    }
+
+
+    /**
+     * arrayTimesEquals method. Multiplies the matrix by a another matrix element wise.  
+     * @param B - the input matrix to multiply by.
+    **/
+    public Matrix arrayTimesEquals(Matrix B) {
+        Matrix c = new Matrix(length, width, 0);
+        double[][] b = B.getMatrix();
+        double[][] m = new double[length][width];
+        for (int i = 0; i < length; ++i)
+	        for (int j = 0; j < width; ++j)
+		        m[i][j] = b[i][j] * matrix[i][j];
+        setMatrix(m);
+        c.setMatrix(m);
+        return c;
+    }
+
+
+    /**
+     * arrayRightDivide method. Performs a right division element wise. 
+     * @param B - the input matrix to divide by.
+     */
+    public Matrix arrayRightDivide(Matrix B) {
+        Matrix c = new Matrix(length, width, 0);
+        double[][] b = B.getMatrix();
+        double[][] m = new double[length][width];
+        for (int i = 0; i < length; ++i)
+	        for (int j = 0; j < width; ++j)
+		        m[i][j] = matrix[i][j] / b[i][j];
+        c.setMatrix(m);
+        return c;
+    }
+
+
+    /**
+     * arrayRightDivideEquals method. Performs a right division element wise. 
+     * @param B - the input matrix to divide by.
+     */
+    public Matrix arrayRightDivideEquals(Matrix B) {
+        Matrix c = new Matrix(length, width, 0);
+        double[][] b = B.getMatrix();
+        double[][] m = new double[length][width];
+        for (int i = 0; i < length; ++i)
+	        for (int j = 0; j < width; ++j)
+		        m[i][j] = matrix[i][j] / b[i][j];
+        setMatrix(m);
+        c.setMatrix(m);
+        return c;
+    }
+
+
+    /**
+     * arrayLeftDivide method. Performs a left division element wise. 
+     * @param B - the input matrix to divide by.
+     */
+    public Matrix arrayLeftDivide(Matrix B) {
+        Matrix c = new Matrix(length, width, 0);
+        double[][] b = B.getMatrix();
+        double[][] m = new double[length][width];
+        for (int i = 0; i < length; ++i)
+	        for (int j = 0; j < width; ++j)
+		        m[i][j] = b[i][j] / matrix[i][j];
+        c.setMatrix(m);
+        return c;
+    }
+
+
+    /**
+     * arrayLeftDivideEquals method. Performs a left division element wise. 
+     * @param B - the input matrix to divide by.
+     */
+    public Matrix arrayLeftDivideEquals(Matrix B) {
+        Matrix c = new Matrix(length, width, 0);
+        double[][] b = B.getMatrix();
+        double[][] m = new double[length][width];
+        for (int i = 0; i < length; ++i)
+	        for (int j = 0; j < width; ++j)
+		        m[i][j] = b[i][j] / matrix[i][j];
+        setMatrix(m);
+        c.setMatrix(m);
         return c;
     }
 
@@ -215,6 +332,7 @@ public class Matrix {
         setMatrix(arr3);
         return new Matrix(matrix);
     }
+
 
     /**
      * transpose
