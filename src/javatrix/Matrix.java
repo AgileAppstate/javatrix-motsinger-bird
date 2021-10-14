@@ -99,7 +99,7 @@ public class Matrix {
         matrix = new double[length][width];
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < width; j++) {
-                matrix[i][j] = vals[(i*m)+j];
+                matrix[i][j] = vals[i+(j*m)];
             }
         }
     }
