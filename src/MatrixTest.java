@@ -482,7 +482,7 @@ public class MatrixTest {
 
 
     @Test
-    public void testGetArrayCopy() {
+    public void testArrayCopy() {
         Matrix a = new Matrix(new double[][]{{0., 0.}, {0., 0.}});
         double[][] copy = a.getArrayCopy();
         double[][] am = a.getMatrix();
@@ -491,5 +491,47 @@ public class MatrixTest {
                 assert(am[i][j] == copy[i][j]);
     }
 	
+
+    @Test
+    public void testColumnPackedCopy() {
+        double[][] pack = {{1, 4},
+                           {2, 5},
+                           {3, 6}};
+        Matrix a = new Matrix(pack);
+        double[] am = a.getColumnPackedCopy();
+        double prev = 0.0;
+        for (int i = 0; i < 6; i++) {
+            assert(am[i] > prev);
+            prev = am[i];
+        }
+    }
+
+    
+    @Test
+    public void testRowPackedCopy() {
+        double[][] pack = {{1, 2},
+                           {3, 4},
+                           {5, 6}};
+        Matrix a = new Matrix(pack);
+        double[] am = a.getRowPackedCopy();
+        double prev = 0.0;
+        for (int i = 0; i < 6; i++) {
+            assert(am[i] > prev);
+            prev = am[i];
+        }
+    }
+
+
+    @Test
+    public void testTranspose() {
+        double[][] arr = {{1, 2, 3},
+                          {4, 5, 6},
+                          {7, 8, 9}};
+        Matrix a = new Matrix(arr);
+        Matrix b = a.transpose();
+        for (int i = 0; i < a.getLength(); i++)
+            for (int j = 0; j < a.getWidth(); j++)
+                assert(a.get(i, j) == b.get(j, i));
+    }
 }
 	
